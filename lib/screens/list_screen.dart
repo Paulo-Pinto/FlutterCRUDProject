@@ -20,13 +20,21 @@ class ListScreen extends StatelessWidget {
         ),
         body: ListView.builder(
             itemCount: registarM.getLength(),
+            // TODO : Ordenar por data
             itemBuilder: (context, index) {
               final Registo item = registarM.getIndex(index);
+
               return Dismissible(
                 confirmDismiss: (DismissDirection direction) async {
                   return await showDialog(
                     context: context,
                     builder: (BuildContext context) {
+                      // if (item.getAgeInDays() < 7) {
+                      //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      //       content: Text(
+                      //           'Só podem ser eliminados registos datados dos últimos 7 dias.')));
+                      //   return SizedBox.shrink();
+                      // }
                       return AlertDialog(
                         title: const Text("Confirmação"),
                         content:
@@ -45,7 +53,8 @@ class ListScreen extends StatelessWidget {
                 },
                 key: Key(item.id.toString()),
                 onDismissed: (direction) {
-                  if (registarM.deletable()) {
+                  if (item.getAgeInDays() < 7) {
+                    print(item);
                     registarM.removeItem(item);
                     // 'Registo de ' + item.formatDate() + ' removido'
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -55,6 +64,11 @@ class ListScreen extends StatelessWidget {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text(
                             'Só podem ser eliminados registos datados dos últimos 7 dias.')));
+                    // Navigator.push(
+                    //   context,
+                    //   // TODO : make this dynamic, return to the screen that accessed it
+                    //   MaterialPageRoute(builder: (context) => ListScreen()),
+                    // );
                   }
                 },
                 // TODO : add editar 8
