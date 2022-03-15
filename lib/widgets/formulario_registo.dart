@@ -123,7 +123,7 @@ class _FormularioRegisto extends State<FormularioRegisto> {
             child: ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate() && obsComplete) {
-                  var r = Registo(peso, comeu, rate.round(), obs);
+                  var r = Registo(peso, comeu, rate.round(), obs, DateTime.now());
                   print(r);
                   registoM.insert(r);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(

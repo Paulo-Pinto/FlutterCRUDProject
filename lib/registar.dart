@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proj_comp_movel/screens/dashboard_screen.dart';
 import 'package:proj_comp_movel/screens/list_screen.dart';
 import 'package:proj_comp_movel/widgets/formulario_registo.dart';
 
@@ -48,13 +49,12 @@ class _RegistarScreen extends StatelessWidget {
                 }),
             const SizedBox(height: 10), // space between buttons
             FloatingActionButton(
-                heroTag: "Registar",
+                heroTag: "Dashboard",
                 child: const Icon(Icons.keyboard_return),
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => _RegistarScreen()),
-                    // TODO : create dashboard and go there
+                    MaterialPageRoute(builder: (context) => DashboardScreen()),
                   );
                 }),
           ],

@@ -57,7 +57,7 @@ class ListScreen extends StatelessWidget {
                             'Só podem ser eliminados registos datados dos últimos 7 dias.')));
                   }
                 },
-                // TODO : add editar
+                // TODO : add editar 8
                 background: Container(color: Colors.red),
                 child: ListTile(
                   minVerticalPadding: 20,
@@ -71,6 +71,7 @@ class ListScreen extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
+                // TODO : make this dynamic, return to the screen that accessed it
                 MaterialPageRoute(builder: (context) => RegistarScreen()),
               );
             }),
