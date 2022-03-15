@@ -1,12 +1,39 @@
+import 'dart:math';
+
 import 'package:intl/intl.dart';
 
 class RegistarModel {
   static RegistarModel? _instance;
 
   final _registos = [
-    Registo(58, true, 4, "Vincent Aboubakar", DateTime(2022, 3, 10, 15, 30)),
-    Registo(68, false, 1, "Moussa Marega", DateTime.now())
+    // Registo(58, true, 4, "Vincent Aboubakar", DateTime(2022, 3, 10, 15, 30)),
+    // Registo(68, false, 1, "Moussa Marega", DateTime.now())
   ];
+  bool gerados = false;
+
+  void gerarRegistos() {
+    // gera apenas uma vez
+    if (gerados == true) return;
+
+    var random = Random();
+    var pesoInicial = 70.0;
+    var month = 2;
+    var day = 15;
+    for (var i = 15; i < 45; i++) {
+      pesoInicial += random.nextInt(10) - 5;
+
+      day = i;
+      if (i >= 28) {
+        month = 3;
+        day = i - 27;
+      }
+
+      var r = Registo(pesoInicial, random.nextBool(), random.nextInt(4) + 1,
+          String.fromCharCode(i), DateTime(2022, month = month, day, 15, 30));
+      _registos.add(r);
+    }
+    gerados = true;
+  }
 
   RegistarModel._internal();
 
@@ -25,13 +52,13 @@ class RegistarModel {
 
   int getLength() => _registos.length;
 
-  Registo? firstRegisto(){
-    if(_registos.isEmpty) return null;
+  Registo? firstRegisto() {
+    if (_registos.isEmpty) return null;
 
     Registo oldest = _registos[0];
 
-    for(var r in _registos){
-      if(r.data.compareTo(oldest.data) < 0){
+    for (var r in _registos) {
+      if (r.data.compareTo(oldest.data) < 0) {
         oldest = r;
       }
     }
@@ -39,13 +66,13 @@ class RegistarModel {
     return oldest;
   }
 
-  Registo? lastRegisto(){
-    if(_registos.isEmpty) return null;
+  Registo? lastRegisto() {
+    if (_registos.isEmpty) return null;
 
     Registo latest = _registos[0];
 
-    for(var r in _registos){
-      if(r.data.compareTo(latest.data) > 0){
+    for (var r in _registos) {
+      if (r.data.compareTo(latest.data) > 0) {
         latest = r;
       }
     }
@@ -57,30 +84,33 @@ class RegistarModel {
     var media = 0.0;
     var ctrRegistos = 0;
     for (Registo r in _registos) {
-      if (r.getAgeInDays() <= dias) {
+      if (r.getAgeInDays() > 0 && r.getAgeInDays() <= dias) {
         media += r.peso;
         ctrRegistos++;
       }
     }
 
-    return (media / ctrRegistos).toString();
+    print("$dias media $media for $ctrRegistos = " +
+        (media / ctrRegistos).toStringAsFixed(2));
+    return (media / ctrRegistos).toStringAsFixed(2);
   }
 
   double getMediaPesoInRange(int diasAtrasInicio, int diasAtrasFim) {
     var media = 0.0;
     var ctrRegistos = 0;
     for (Registo r in _registos) {
-      if (diasAtrasInicio < r.getAgeInDays() &&
+      if (diasAtrasInicio <= r.getAgeInDays() &&
           r.getAgeInDays() <= diasAtrasFim) {
         media += r.peso;
         ctrRegistos++;
       }
     }
-
+    print(
+        "in range $diasAtrasInicio to $diasAtrasFim media $media for $ctrRegistos");
     return (media / ctrRegistos);
   }
 
-  // TODO : testar esta função
+  // TODO : fix this
   String getVarianciaPesoShort(int dias) {
     // antigo (dias 1 a 7)
 
@@ -91,7 +121,7 @@ class RegistarModel {
       return "";
     }
 
-    return (((media1 - media2) / media1) * 100).toString();
+    return (((media1 - media2) / media1) * 100).toStringAsFixed(2);
   }
 
   String getVarianciaPeso(int dias) {
@@ -119,14 +149,18 @@ class RegistarModel {
       }
     }
 
-    media1 = (media1 / ctrRegistos1);
-    media2 = (media2 / ctrRegistos2);
+    media1 = double.parse((media1 / ctrRegistos1).toStringAsFixed(2));
+    media2 = double.parse((media2 / ctrRegistos2).toStringAsFixed(2));
 
     if (ctrRegistos2 == 0 || ctrRegistos1 == 0) {
       return "";
     }
 
-    return (((media1 - media2) / media1) * 100).toString();
+    print(
+        "VARIANCE \n $dias media ($media1 in $ctrRegistos1), ($media2 in $ctrRegistos2) = " +
+            (((media1 - media2) / media1) * 100).toStringAsFixed(2));
+
+    return (((media1 - media2) / media1) * 100).toStringAsFixed(2);
   }
 
   String getVarianciaRate(int dias) {
@@ -156,12 +190,12 @@ class RegistarModel {
 
     media1 = (media1 / ctrRegistos1);
     media2 = (media2 / ctrRegistos2);
-
+    // após 1 mês de dados, começar a mostrar variancia após 30 dias
     if (ctrRegistos2 == 0 || ctrRegistos1 == 0) {
       return "";
     }
 
-    return (((media1 - media2) / media1) * 100).toString();
+    return (((media1 - media2) / media1) * 100).toStringAsFixed(2);
   }
 
   String getMediaRate(int dias) {
@@ -174,7 +208,7 @@ class RegistarModel {
       }
     }
 
-    return (media / ctrRegistos).toString();
+    return (media / ctrRegistos).toStringAsFixed(2);
   }
 }
 
@@ -190,7 +224,6 @@ class Registo {
   Registo(this.peso, this.comeu, this.rate, this.obs, this.data) {
     lastId++;
   }
-
 
   String getPesoString() => peso.toString() + " kg";
 
@@ -213,7 +246,7 @@ class Registo {
   String toDisplay() {
     return formatDate() +
         " - Pesou ${peso} kg, " +
-        (!comeu ? " não " : "") +
+        (!comeu ? "não " : "") +
         "comeu, e avaliou o seu dia com $rate/5";
   }
 
