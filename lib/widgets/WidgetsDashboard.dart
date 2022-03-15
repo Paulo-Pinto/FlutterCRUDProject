@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../models/registar_model.dart';
+import 'custom_table_cell.dart';
 
 class Primeiro extends StatelessWidget {
   // constructor
@@ -12,6 +13,7 @@ class Primeiro extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final registarM = RegistarModel.getInstance();
+    registarM.gerarRegistos();
     final first = registarM.firstRegisto();
 
     if (first != null) {
@@ -43,6 +45,7 @@ class Ultimo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final registarM = RegistarModel.getInstance();
+    registarM.gerarRegistos();
     final last = registarM.lastRegisto();
 
     if (last != null) {
@@ -74,6 +77,7 @@ class TableMedias extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final registarM = RegistarModel.getInstance();
+    registarM.gerarRegistos();
 
     return Container(
       padding: EdgeInsets.all(2.0),
@@ -91,7 +95,7 @@ class TableMedias extends StatelessWidget {
               1: FlexColumnWidth(3),
               2: FlexColumnWidth(3),
             },
-            border: TableBorder.all(color: Colors.grey),
+            border: TableBorder.all(color: Color(0xc1a5b0b3)),
             children: [
               const TableRow(children: [
                 Center(
@@ -111,14 +115,16 @@ class TableMedias extends StatelessWidget {
                   ),
                 ),
                 Center(
-                  child: Text(registarM.getMediaPeso(7) +
-                      " " +
-                      registarM.getVarianciaPeso(7)),
+                  child: CustomTableCell(
+                      media: registarM.getMediaPeso(7),
+                      variancia: registarM.getVarianciaPeso(7),
+                      rating: false),
                 ),
                 Center(
-                  child: Text(registarM.getMediaPeso(30) +
-                      " " +
-                      registarM.getVarianciaPeso(30)),
+                  child: CustomTableCell(
+                      media: registarM.getMediaPeso(30),
+                      variancia: registarM.getVarianciaPeso(30),
+                      rating: false),
                 ),
               ]),
               TableRow(children: [
@@ -126,14 +132,16 @@ class TableMedias extends StatelessWidget {
                   child: Text('Rating'),
                 ),
                 Center(
-                  child: Text(registarM.getMediaRate(7) +
-                      " " +
-                      registarM.getVarianciaRate(7)),
+                  child: CustomTableCell(
+                      media: registarM.getMediaRate(7),
+                      variancia: registarM.getVarianciaRate(7),
+                      rating: true),
                 ),
                 Center(
-                  child: Text(registarM.getMediaRate(30) +
-                      " " +
-                      registarM.getVarianciaRate(30)),
+                  child: CustomTableCell(
+                      media: registarM.getMediaRate(30),
+                      variancia: registarM.getVarianciaRate(30),
+                      rating: true),
                 ),
               ]),
             ]),
@@ -141,3 +149,5 @@ class TableMedias extends StatelessWidget {
     );
   }
 }
+
+
