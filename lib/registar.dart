@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:proj_comp_movel/screens/list_screen.dart';
 import 'package:proj_comp_movel/widgets/formulario_registo.dart';
-
-import 'models/registar_model.dart';
 
 void main() {
   runApp(const RegistarScreen());
@@ -14,36 +13,51 @@ class RegistarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Registar',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-          appBar: AppBar(
-            title: const Text("Registar"),
-          ),
-          body: const Padding(
-            padding: EdgeInsets.symmetric(vertical: 20.0,horizontal: 20.0),
-            child: FormularioRegisto(),
-          )
-
-          // floatingActionButton: FloatingActionButton(
-          //   onPressed: () {
-          //     showDialog(
-          //       context: context,
-          //       builder: (context) {
-          //         return AlertDialog(
-          //           // Retrieve the text that the user has entered by using the
-          //           // TextEditingController.
-          //           content: Text(myController.text),
-          //         );
-          //       },
-          //     );
-          //   },
-          //   tooltip: 'submit',
-          //   child: const Icon(Icons.check),
-          // ),
-          ),
+      home: _RegistarScreen(),
     );
+  }
+}
+
+class _RegistarScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text("Registar"),
+        ),
+        body: const Padding(
+          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+          child: FormularioRegisto(),
+        ),
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+                heroTag: "Listar",
+                child: const Icon(Icons.list),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ListScreen()),
+                  );
+                }),
+            const SizedBox(height: 10), // space between buttons
+            FloatingActionButton(
+                heroTag: "Registar",
+                child: const Icon(Icons.keyboard_return),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => _RegistarScreen()),
+                    // TODO : create dashboard and go there
+                  );
+                }),
+          ],
+        ));
   }
 }
