@@ -122,32 +122,26 @@ class _FormularioRegisto extends State<FormularioRegisto> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
+                if (_formKey.currentState!.validate() && obsComplete) {
                   var r = Registo(peso, comeu, rate.round(), obs);
                   print(r);
-                  if (obsComplete) {
-                    print("entered");
-                    registoM.insert(r);
-                    print(registoM);
-                    // TODO : ir para a página deste registo em particular, quando feito
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: const Text(
-                            "O seu registo foi adicionado com sucesso."),
-                        duration: const Duration(seconds: 15),
-                        action: SnackBarAction(
-                          label: 'Aceder',
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                            // TODO : Criar página única para registo
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(builder: (context) => RegistoScreen(registo)),
-                            // );
-                          },
-                        ),
-                      ));
-                  }
+                  registoM.insert(r);
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content:
+                        const Text("O seu registo foi adicionado com sucesso."),
+                    duration: const Duration(seconds: 15),
+                    action: SnackBarAction(
+                      label: 'Aceder',
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        // TODO : Criar página única para registo
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => RegistoScreen(registo)),
+                        // );
+                      },
+                    ),
+                  ));
                 }
               },
               child: const Text('Submit'),
