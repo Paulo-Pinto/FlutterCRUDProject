@@ -22,7 +22,8 @@ class _FormularioRegisto extends State<FormularioRegisto> {
 
   @override
   Widget build(BuildContext context) {
-    final registoM = RegistarModel.getInstance();
+    final registarM = RegistarModel.getInstance();
+    registarM.gerarRegistos();
 
     return Form(
       key: _formKey,
@@ -93,7 +94,7 @@ class _FormularioRegisto extends State<FormularioRegisto> {
             },
           ),
           CheckboxListTile(
-            title: Text("Comeu hoje?"),
+            title: Text("Alimentou-se nas últimas 3 horas?"),
             controlAffinity: ListTileControlAffinity.leading,
             checkColor: Colors.white,
             // fillColor: MaterialStateProperty.all<Color>(Colors.blue),
@@ -125,7 +126,7 @@ class _FormularioRegisto extends State<FormularioRegisto> {
                 if (_formKey.currentState!.validate() && obsComplete) {
                   var r = Registo(peso, comeu, rate.round(), obs, DateTime.now());
                   print(r);
-                  registoM.insert(r);
+                  registarM.insert(r);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content:
                         const Text("O seu registo foi adicionado com sucesso."),
@@ -144,7 +145,7 @@ class _FormularioRegisto extends State<FormularioRegisto> {
                   ));
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Registar'),
             ),
           ),
         ],
