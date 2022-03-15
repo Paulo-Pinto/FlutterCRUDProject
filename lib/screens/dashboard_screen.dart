@@ -3,6 +3,8 @@ import 'package:proj_comp_movel/screens/list_screen.dart';
 
 import '../registar.dart';
 import '../widgets/WidgetsDashboard.dart';
+import '../widgets/primeiro.dart';
+import '../widgets/ultimo.dart';
 
 void main() {
   runApp(const DashboardScreen());

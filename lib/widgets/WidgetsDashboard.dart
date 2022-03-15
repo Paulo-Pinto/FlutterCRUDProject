@@ -4,70 +4,6 @@ import 'package:flutter/material.dart';
 import '../models/registar_model.dart';
 import 'custom_table_cell.dart';
 
-class Primeiro extends StatelessWidget {
-  // constructor
-  const Primeiro({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final registarM = RegistarModel.getInstance();
-    registarM.gerarRegistos();
-    final first = registarM.firstRegisto();
-
-    if (first != null) {
-      return RichText(
-          text: TextSpan(
-              style: DefaultTextStyle.of(context).style,
-              children: <TextSpan>[
-            TextSpan(text: 'Primeiro Registo: a '),
-            TextSpan(
-                text: first.formatDate(),
-                style: const TextStyle(fontWeight: FontWeight.bold)),
-            TextSpan(text: ' pesou '),
-            TextSpan(
-                text: first.getPesoString(),
-                style: const TextStyle(fontWeight: FontWeight.bold)),
-          ]));
-    }
-
-    return RichText(text: const TextSpan());
-  }
-}
-
-class Ultimo extends StatelessWidget {
-  // constructor
-  const Ultimo({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final registarM = RegistarModel.getInstance();
-    registarM.gerarRegistos();
-    final last = registarM.lastRegisto();
-
-    if (last != null) {
-      return RichText(
-          text: TextSpan(
-              style: DefaultTextStyle.of(context).style,
-              children: <TextSpan>[
-            TextSpan(text: '\nÚltimo Registo: a '),
-            TextSpan(
-                text: last.formatDate(),
-                style: const TextStyle(fontWeight: FontWeight.bold)),
-            TextSpan(text: ' pesou '),
-            TextSpan(
-                text: last.getPesoString(),
-                style: const TextStyle(fontWeight: FontWeight.bold)),
-          ]));
-    }
-
-    return RichText(text: const TextSpan());
-  }
-}
-
 class TableMedias extends StatelessWidget {
   // constructor
   const TableMedias({
@@ -89,13 +25,20 @@ class TableMedias extends StatelessWidget {
         color: Colors.white,
         padding: EdgeInsets.all(20.0),
         child: Table(
-            // TODO : remove border + stylize table
+            // TODO : stylize table
             columnWidths: const {
               0: FlexColumnWidth(2),
               1: FlexColumnWidth(3),
               2: FlexColumnWidth(3),
             },
-            border: TableBorder.all(color: Color(0xc1a5b0b3)),
+
+            // border: TableBorder.all(color: Color(0xc1a5b0b3)),
+            border: TableBorder.symmetric(
+              inside: BorderSide(
+                  width: 0.8,
+                  color: Color(0xc1a5b0b3)),
+            ),
+            // border: TableBorde,
             children: [
               const TableRow(children: [
                 Center(
