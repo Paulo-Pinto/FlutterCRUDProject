@@ -14,24 +14,16 @@ class FormularioRegisto extends StatefulWidget {
 class _FormularioRegisto extends State<FormularioRegisto> {
   final _formKey = GlobalKey<FormState>();
 
-  // final myController = TextEditingController();
   double peso = 0;
   bool comeu = false;
   double rate = 1.0;
   String obs = "";
   bool obsComplete = false;
 
-  // @override
-  // void dispose() {
-  //   // Clean up the controller when the widget is disposed.
-  //   myController.dispose();
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
-    final m = RegistarModel.getInstance();
-    // Build a Form widget using the _formKey created above.
+    final registoM = RegistarModel.getInstance();
+
     return Form(
       key: _formKey,
       child: Wrap(
@@ -82,9 +74,8 @@ class _FormularioRegisto extends State<FormularioRegisto> {
                     content: Text(
                         "Escreva entre 100 e 200 caracteres (escreveu $obsLen)"),
                     duration: const Duration(seconds: 1),
-                    backgroundColor: Colors.black54,
                     action: SnackBarAction(
-                      label: 'Dismiss',
+                      label: 'Fechar',
                       onPressed: () {
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       },
@@ -136,10 +127,26 @@ class _FormularioRegisto extends State<FormularioRegisto> {
                   print(r);
                   if (obsComplete) {
                     print("entered");
+                    registoM.insert(r);
+                    print(registoM);
+                    // TODO : ir para a página deste registo em particular, quando feito
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text("Registo adicionado com sucesso!")),
-                    );
+                      SnackBar(
+                        content: const Text(
+                            "O seu registo foi adicionado com sucesso."),
+                        duration: const Duration(seconds: 15),
+                        action: SnackBarAction(
+                          label: 'Aceder',
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                            // TODO : Criar página única para registo
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(builder: (context) => RegistoScreen(registo)),
+                            // );
+                          },
+                        ),
+                      ));
                   }
                 }
               },
@@ -151,4 +158,5 @@ class _FormularioRegisto extends State<FormularioRegisto> {
     );
   }
 }
-// TODO : save registos
+
+// TODO : organize build method (divide into widgets)
