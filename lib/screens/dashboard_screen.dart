@@ -38,20 +38,21 @@ class _DashboardScreen extends StatelessWidget {
         body: Padding(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
           child: Column(children: <Widget>[
+            const SizedBox(height: 10),
             TableMedias(),
-            const SizedBox(height: 20), // space between buttons
+            const SizedBox(height: 30),
             Primeiro(),
             Ultimo(),
-            const SizedBox(height: 40), // space between buttons
+            const SizedBox(height: 40),
             RichText(
                 text: const TextSpan(
-              text: 'Gráfico últimos 15 pesos',
+              text: 'Gráfico últimos 15 registos',
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 25,
+                  fontSize: 30,
                   fontWeight: FontWeight.bold),
             )),
-            const SizedBox(height: 10), // space between buttons
+            const SizedBox(height: 20),
             GraficoRegistos(),
           ]),
         ),
@@ -84,6 +85,8 @@ class _DashboardScreen extends StatelessWidget {
 }
 
 class InfoDashboard extends StatelessWidget {
+  const InfoDashboard({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold();
