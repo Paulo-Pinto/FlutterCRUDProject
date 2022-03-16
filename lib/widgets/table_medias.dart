@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../models/registar_model.dart';
@@ -34,7 +33,7 @@ class TableMedias extends StatelessWidget {
 
             // border: TableBorder.all(color: Color(0xc1a5b0b3)),
             border: TableBorder.symmetric(
-              inside: BorderSide(
+              inside: const BorderSide(
                   width: 0.8,
                   color: Color(0xc1a5b0b3)),
             ),

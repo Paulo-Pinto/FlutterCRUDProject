@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/registar_model.dart';
-import '../registar.dart';
+import 'registar_screen.dart';
 
 class ListScreen extends StatelessWidget {
   const ListScreen({Key? key}) : super(key: key);
@@ -29,12 +29,6 @@ class ListScreen extends StatelessWidget {
                   return await showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      // if (item.getAgeInDays() < 7) {
-                      //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      //       content: Text(
-                      //           'Só podem ser eliminados registos datados dos últimos 7 dias.')));
-                      //   return SizedBox.shrink();
-                      // }
                       return AlertDialog(
                         title: const Text("Confirmação"),
                         content:
@@ -64,14 +58,9 @@ class ListScreen extends StatelessWidget {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text(
                             'Só podem ser eliminados registos datados dos últimos 7 dias.')));
-                    // Navigator.push(
-                    //   context,
-                    //   // TODO : make this dynamic, return to the screen that accessed it
-                    //   MaterialPageRoute(builder: (context) => ListScreen()),
-                    // );
                   }
                 },
-                // TODO : add editar 8
+                // TODO : add editar
                 background: Container(color: Colors.red),
                 child: ListTile(
                   minVerticalPadding: 20,
