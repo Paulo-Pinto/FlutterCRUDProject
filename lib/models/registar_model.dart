@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 
 class RegistarModel {
@@ -9,6 +10,9 @@ class RegistarModel {
     // Registo(58, true, 4, "Vincent Aboubakar", DateTime(2022, 3, 10, 15, 30)),
     // Registo(68, false, 1, "Moussa Marega", DateTime.now())
   ];
+  final _pesos = {};
+  final _pesosL = [];
+
   bool gerados = false;
 
   void gerarRegistos() {
@@ -27,10 +31,16 @@ class RegistarModel {
         month = 3;
         day = i - 27;
       }
-
       var r = Registo(pesoInicial, random.nextBool(), random.nextInt(4) + 1,
           String.fromCharCode(i), DateTime(2022, month = month, day, 15, 30));
       _registos.add(r);
+    }
+    // TODO : remove map _pesos
+    var pos = 1;
+    for (Registo r in _registos) {
+      _pesos[pos++] = r.peso;
+      if (_pesosL.length == 15) _pesosL.removeAt(0);
+      _pesosL.add(r.peso);
     }
     gerados = true;
   }
@@ -51,6 +61,28 @@ class RegistarModel {
   void removeItem(Registo registo) => _registos.remove(registo);
 
   int getLength() => _registos.length;
+
+  // List<FlSpot> getPesos() => _pesos.forEach((k, v) => FlSpot(k, v)).toList();
+  List<FlSpot> getPesos() => _pesosL.asMap().entries.map((e) {
+        return FlSpot(e.key.toDouble(), e.value);
+      }).toList();
+
+  // _registos.map((x) => FlSpot(double.parse("${DateFormat('MM').format(x.data)}${DateFormat('dd').format(x.data)}"), x.peso)).toList();
+
+  double getMinPeso() {
+    var l = [];
+    _pesos.forEach((k, v) => l.add(v));
+    return l.reduce((curr, next) => curr < next ? curr : next);
+  }
+
+  double getMaxPeso() {
+    var l = [];
+    _pesos.forEach((k, v) => l.add(v));
+    return l.reduce((curr, next) => curr > next ? curr : next);
+  }
+
+  // double getMaxPeso() =>
+  //     _pesos.reduce((curr, next) => curr > next ? curr : next);
 
   Registo? firstRegisto() {
     if (_registos.isEmpty) return null;
