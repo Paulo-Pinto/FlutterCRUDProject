@@ -30,7 +30,7 @@ class GraficoRegistos extends StatelessWidget {
                         fontSize: 14,
                       );
                       return LineTooltipItem(
-                          '${touchedSpot.x}, ${touchedSpot.y.toStringAsFixed(2)}',
+                          '${touchedSpot.x} - ${touchedSpot.y.toStringAsFixed(2)} kg',
                           textStyle);
                     }).toList();
                   }),
@@ -47,13 +47,16 @@ class GraficoRegistos extends StatelessWidget {
                 isStrokeCapRound: true,
                 barWidth: 4,
                 belowBarData: BarAreaData(
-                  show: false,
+                  show: true,
+                  colors: [
+                    const Color(0x45A2A3FF),
+                  ],
                 ),
                 dotData: FlDotData(show: true),
               ),
             ],
-            minY: registarM.getMinPeso() - 5,
-            maxY: registarM.getMaxPeso() + 5,
+            minY: registarM.getMinPeso() - 3,
+            maxY: registarM.getMaxPeso() + 3,
             titlesData: FlTitlesData(
               leftTitles: SideTitles(
                   showTitles: true,
