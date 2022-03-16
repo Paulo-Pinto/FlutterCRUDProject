@@ -69,7 +69,7 @@ class TableMedias extends StatelessWidget {
               ]),
               TableRow(children: [
                 const Center(
-                  child: Text('Rating'),
+                  child: Text('Disposição'),
                 ),
                 Center(
                   child: CustomTableCell(
