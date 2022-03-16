@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:proj_comp_movel/screens/dashboard_screen.dart';
 import 'package:proj_comp_movel/screens/editar_registo_screen.dart';
@@ -41,8 +43,13 @@ class ListScreen extends StatelessWidget {
                               " este registo?"),
                           actions: <Widget>[
                             TextButton(
-                                onPressed: () =>
-                                    Navigator.of(context).pop(true),
+                                onPressed: () {
+                                  if (item.getAgeInDays() >= 7) {
+                                    Navigator.of(context).pop(false);
+                                  } else {
+                                    Navigator.of(context).pop(true);
+                                  }
+                                },
                                 child: Text(
                                     ((direction == DismissDirection.endToStart)
                                         ? "Apagar"
@@ -81,21 +88,23 @@ class ListScreen extends StatelessWidget {
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text(
-                              'Só podem ser eliminados registos datados dos últimos 7 dias.')));
+                              'Só podem ser alterados registos datados dos últimos 7 dias. Registo foi escondido.')));
                     }
                   },
-                  // TODO : add editar
                   background: Container(
                     // color: Colors.red,
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
                           Colors.grey,
-                          Colors.white,
+                          Colors.grey,
+                          // Colors.white,
                           Colors.white,
                           Colors.red,
+                          Colors.red,
                         ],
-                        stops: [0.0,0.48, 0.52, 1.0],
+                        // stops: [0.0,0.48, 0.52, 1.0],
+                        stops: [0.0, 0.4, 0.5, 0.6, 1.0],
                         end: Alignment.centerRight,
                         begin: Alignment.centerLeft,
                       ),
@@ -103,7 +112,13 @@ class ListScreen extends StatelessWidget {
                   ),
                   child: ListTile(
                     minVerticalPadding: 20,
-                    leading: const Icon(Icons.monitor_weight_rounded, size: 50),
+                    leading: Icon(
+                      Icons.monitor_weight_rounded,
+                      size: 50,
+                      color: ((item.getAgeInDays() < 7)
+                          ? Colors.blue
+                          : Colors.grey),
+                    ),
                     title: Text(item.toDisplay()),
                   ),
                 );
