@@ -161,7 +161,7 @@ class _FormularioRegisto extends State<FormularioRegisto> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MostraRegistoScreen()),
+                              builder: (context) => const MostraRegistoScreen()),
                         );
                       },
                     ),
