@@ -9,10 +9,12 @@ class FormularioRegistoPreenchidoNaoEditavel extends StatefulWidget {
   const FormularioRegistoPreenchidoNaoEditavel({Key? key}) : super(key: key);
 
   @override
-  _FormularioRegistoPreenchidoNaoEditavel createState() => _FormularioRegistoPreenchidoNaoEditavel();
+  _FormularioRegistoPreenchidoNaoEditavel createState() =>
+      _FormularioRegistoPreenchidoNaoEditavel();
 }
 
-class _FormularioRegistoPreenchidoNaoEditavel extends State<FormularioRegistoPreenchidoNaoEditavel> {
+class _FormularioRegistoPreenchidoNaoEditavel
+    extends State<FormularioRegistoPreenchidoNaoEditavel> {
   final _formKey = GlobalKey<FormState>();
 
   double peso = 0;
@@ -46,20 +48,9 @@ class _FormularioRegistoPreenchidoNaoEditavel extends State<FormularioRegistoPre
               hintText: 'Quanto pesou hoje?',
               labelText: 'Peso',
             ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Insira o peso';
-              }
-              value = value.replaceAll(",", ".");
-              if (double.tryParse(value) == null) {
-                return 'Insira um número';
-              }
-              peso = double.parse(value);
-              return null;
-            },
           ),
           TextFormField(
-            enabled:false,
+            enabled: false,
             initialValue: (obs.isEmpty) ? "" : obs,
             maxLines: 3,
             maxLength: 200,
@@ -68,39 +59,6 @@ class _FormularioRegistoPreenchidoNaoEditavel extends State<FormularioRegistoPre
               border: OutlineInputBorder(),
               labelText: 'Observações (opcional)',
             ),
-            validator: (value) {
-              if (value != null) {
-                var obsLen = value.length;
-                // observation is empty
-                if (obsLen == 0) {
-                  obsComplete = true;
-                  obs = "";
-                  return null;
-                }
-                // observation is not empty, and is not in 100 < x < 200
-                if (obsLen < 100 || obsLen > 200) {
-                  obsComplete = false;
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(
-                        "Escreva entre 100 e 200 caracteres (escreveu $obsLen)"),
-                    duration: const Duration(seconds: 1),
-                    action: SnackBarAction(
-                      label: 'Fechar',
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      },
-                    ),
-                  ));
-                } else {
-                  // observation is okay, save it
-                  obsComplete = true;
-                  obs = value;
-                  return null;
-                }
-              }
-              obs = "";
-              return null;
-            },
           ),
           CheckboxListTile(
             title: Text("Alimentou-se nas últimas 3 horas?"),
@@ -108,9 +66,7 @@ class _FormularioRegistoPreenchidoNaoEditavel extends State<FormularioRegistoPre
             checkColor: Colors.white,
             value: comeu,
             onChanged: (bool? value) {
-              setState(() {
-                comeu = value!;
-              });
+              setState(() {});
             },
           ),
           const SizedBox(height: 40),
@@ -135,9 +91,7 @@ class _FormularioRegistoPreenchidoNaoEditavel extends State<FormularioRegistoPre
             activeColor: Colors.blue,
             label: rate.round().toString(),
             onChanged: (double value) {
-              setState(() {
-                rate = value;
-              });
+              setState(() {});
             },
           ),
         ],
