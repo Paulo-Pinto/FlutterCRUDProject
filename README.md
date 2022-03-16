@@ -1,8 +1,11 @@
 # Projeto Computação Móvel - iQueChumbei
-## 👨‍🎓 Paulo Pinto - a21906966
+
 ## 🎯 Flutter / Dart / Android Studio
+## 👨‍🎓 Paulo Pinto - a21906966
+
 Projeto para avaliar o desenvolvimento de uma aplicação híbrida de registo de pesos (CRUD) e estatísticas (sem armazenamento de dados).
 
+***
 
 ## Funcionalidades
 ### Criar registos (Create)
@@ -35,16 +38,24 @@ Decidi tornar a média e a variância (dos 7 e 30 dias) numa tabela. Calculei a 
 
 Dei uso à biblioteca [fl_chart](https://pub.dev/packages/fl_chart) para fazer o gráfico, mas admito que foi complicado, principalmente entender a forma como ia passar os dados e tentar passar também as datas dos registos (que no final não consegui).
 
+### Navegabilidade
+
+Dada a simplicidade da aplicação, a principal forma para navegar é através dos `floatingActionButtons` que se encontram no canto inferior direito da aplicação. Estes botões permitem que, em qualquer ecrã, o utilizador possa aceder ao ecrã que pretende ir com apenas um *click*.
+
+
+Devido à natureza dos Widgets utilizados, a aplicação corre bem em qualquer resolução (realista). Exemplos:
+
 
 <!--  ![graph image](/assets/graph_1.png) -->
 <p align="center">
   <img src="/assets/graph_1.png" />
 </p>
 
+***
+
 ## Autoavaliação
 
 Tendo em conta os requisitos que cumpri e a respetiva tabela de cotações, prevejo que a minha nota seja no máximo um 18.
-
 
 Gostaria de ter investido mais na navegabilidade e na estética da aplicação, acho que ficou muito *barebones*, devido ao foco dados à conclusão dos outros requisitos.
 
