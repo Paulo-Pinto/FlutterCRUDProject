@@ -38,6 +38,7 @@ class _FormularioRegistoPreenchidoNaoEditavel extends State<FormularioRegistoPre
         runSpacing: 20,
         children: <Widget>[
           TextFormField(
+            enabled: false,
             initialValue: peso.toString(),
             decoration: const InputDecoration(
               icon: Icon(Icons.monitor_weight_rounded, size: 40),
@@ -58,6 +59,7 @@ class _FormularioRegistoPreenchidoNaoEditavel extends State<FormularioRegistoPre
             },
           ),
           TextFormField(
+            enabled:false,
             initialValue: (obs.isEmpty) ? "" : obs,
             maxLines: 3,
             maxLength: 200,
@@ -111,6 +113,19 @@ class _FormularioRegistoPreenchidoNaoEditavel extends State<FormularioRegistoPre
               });
             },
           ),
+          const SizedBox(height: 40),
+          RichText(
+              textAlign: TextAlign.center,
+              text: const TextSpan(children: <TextSpan>[
+                TextSpan(
+                  text: 'Como se sentiu:',
+                  style: TextStyle(color: Colors.black, fontSize: 24),
+                ),
+                TextSpan(
+                  text: '\n1 - Muito mal / 5 - Muito bem',
+                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                ),
+              ])),
           Slider(
             value: rate,
             min: 1,
