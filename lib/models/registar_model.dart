@@ -56,7 +56,6 @@ class RegistarModel {
 
   Registo getIndex(int index) => _registos[index];
 
-  // TODO : fix, is returning null
   Registo getIndexFromLast(int index) => _registos[getLength() - 1 - index];
 
   void removeItem(Registo registo) => _registos.remove(registo);
@@ -138,7 +137,6 @@ class RegistarModel {
     return (media / ctrRegistos);
   }
 
-// TODO : variancia está ao contrário (?)
   String getVarianciaShort(String choice, int dias) {
     var media1 = getMediaInRange(choice, dias, dias * 2);
     var media2 = getMediaInRange(choice, 0, dias);

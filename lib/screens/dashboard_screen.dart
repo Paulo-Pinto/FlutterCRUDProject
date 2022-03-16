@@ -9,8 +9,6 @@ import '../widgets/primeiro.dart';
 import '../widgets/ultimo.dart';
 
 // TODO : Floating actions buttons com hints na dashboard
-// TODO : página individual registo
-// TODO : novo registo hint - como se sente hoje (1 - Muito mal, 5 - Muito bem)
 
 void main() {
   Paint.enableDithering = true;
