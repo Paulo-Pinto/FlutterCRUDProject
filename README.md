@@ -19,10 +19,18 @@ O utilizador pode criar o registo à sua vontade, desde que os dados introduzido
 
 ## 📚 Consultar registo (Read)
 
+Imediatamente após concluir um registo, o utilizador irá ter a oportunidade de aceder à página do mesmo. clicando no *link* "Consultar Registo", que aparece na parte debaixo do ecrã.
+
 <p align="center">
   <img src="/assets/consultar_registo.png" />
+</p>
+
+A página individual dum registo é similar à da criação, mas **NÃO** é possível editar os campos, é *read-only*. A mudança mais significativa é o verbo mudar para o pretérito-perfeito ;)
+
+<p align="center">
   <img src="/assets/registo_page.png" />
 </p>
+
 
 ## 🧾 Listar registos (Read)
 
@@ -47,6 +55,9 @@ Dando *swipe* da esquerda para a direita e aceitando o *prompt*, somos dirigidos
 </p>
 <p align="center">
   <img src="/assets/lista_edit_5.png" />
+</p>
+Os novos dados são refletidos na lista:
+<p align="center">
   <img src="/assets/lista_edit_6.png" />
 </p>
 
@@ -65,12 +76,11 @@ Dando *swipe* da direita para a esquerda e aceitando o *prompt*, eliminamos o re
 
 ## 🌌 Dashboard
 
-Decidi tornar a média e a variância (dos 7 e 30 dias) numa tabela. Calculei a variância para o peso e também para como a pessoa se sentia (disposição). Estou satisfeito com o estado da Dashboard, julgo estar simples e eficaz a comunicar os dados pedidos.
+Decidi tornar a média e a variância (dos 7 e 30 dias) numa tabela. Calculei a variância para o peso e também para como a pessoa se sentia (disposição). Criei funções dinâmicas, que tanto podiam calcular a média dos pesos para 7 dias, como a médias dos *ratings* para 30. Estou satisfeito com o estado da Dashboard, julgo que está simples e é eficaz a comunicar os dados pedidos.
 
 <p align="center">
   <img src="/assets/dashboard.png" />
 </p>
-
 
 ## 📈 Gráfico Dashboard
 
@@ -84,7 +94,6 @@ Dei uso à biblioteca [fl_chart](https://pub.dev/packages/fl_chart) para fazer o
 ## 🏄‍♀️ Navegabilidade
 
 Dada a simplicidade da aplicação, a principal forma para navegar é através dos `floatingActionButtons` que se encontram no canto inferior direito da aplicação. Estes botões permitem que, em qualquer ecrã, o utilizador possa aceder ao ecrã que pretende ir com apenas um *click*.
-
 
 Devido à natureza dos Widgets utilizados, a aplicação corre bem em qualquer resolução (realista).
 
