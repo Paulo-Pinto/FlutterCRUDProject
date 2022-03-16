@@ -111,12 +111,25 @@ class _FormularioRegistoPreenchido extends State<FormularioRegistoPreenchido> {
               });
             },
           ),
+          const SizedBox(height: 40),
+          RichText(
+              textAlign: TextAlign.center,
+              text: const TextSpan(children: <TextSpan>[
+                TextSpan(
+                  text: 'Como se sente hoje?',
+                  style: TextStyle(color: Colors.black, fontSize: 24),
+                ),
+                TextSpan(
+                  text: '\n1 - Muito mal / 5 - Muito bem',
+                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                ),
+              ])),
           Slider(
             value: rate,
             min: 1,
             max: 5,
             divisions: 4,
-            inactiveColor: const Color(0xABC6D9BE),
+            inactiveColor: const Color(0xB8B8B8FF),
             activeColor: Colors.blue,
             label: rate.round().toString(),
             onChanged: (double value) {
@@ -128,6 +141,14 @@ class _FormularioRegistoPreenchido extends State<FormularioRegistoPreenchido> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  elevation: 14,
+                  fixedSize: const Size(140, 60),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  textStyle: const TextStyle(
+                    fontSize: 24,
+                  )),
               onPressed: () {
                 if (_formKey.currentState!.validate() && obsComplete) {
                   var r = registarM.getRegistoById(registoAtual.id);

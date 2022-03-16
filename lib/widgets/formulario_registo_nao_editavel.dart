@@ -116,7 +116,7 @@ class _FormularioRegistoPreenchidoNaoEditavel extends State<FormularioRegistoPre
             min: 1,
             max: 5,
             divisions: 4,
-            inactiveColor: const Color(0xABC6D9BE),
+            inactiveColor: const Color(0xB8B8B8FF),
             activeColor: Colors.blue,
             label: rate.round().toString(),
             onChanged: (double value) {

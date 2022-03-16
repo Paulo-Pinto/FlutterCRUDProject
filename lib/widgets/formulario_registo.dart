@@ -17,7 +17,7 @@ class _FormularioRegisto extends State<FormularioRegisto> {
 
   double peso = 0;
   bool comeu = false;
-  double rate = 1.0;
+  double rate = 3.0;
   String obs = "";
   bool obsComplete = false;
 
@@ -104,12 +104,25 @@ class _FormularioRegisto extends State<FormularioRegisto> {
               });
             },
           ),
+          const SizedBox(height: 40),
+          RichText(
+              textAlign: TextAlign.center,
+              text: const TextSpan(children: <TextSpan>[
+                TextSpan(
+                  text: 'Como se sente hoje?',
+                  style: TextStyle(color: Colors.black, fontSize: 24),
+                ),
+                TextSpan(
+                  text: '\n1 - Muito mal / 5 - Muito bem',
+                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                ),
+              ])),
           Slider(
             value: rate,
             min: 1,
             max: 5,
             divisions: 4,
-            inactiveColor: const Color(0xABC6D9BE),
+            inactiveColor: const Color(0xB8B8B8FF),
             activeColor: Colors.blue,
             label: rate.round().toString(),
             onChanged: (double value) {
@@ -121,9 +134,18 @@ class _FormularioRegisto extends State<FormularioRegisto> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  elevation: 14,
+                  fixedSize: const Size(140, 60),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  textStyle: const TextStyle(
+                    fontSize: 24,
+                  )),
               onPressed: () {
                 if (_formKey.currentState!.validate() && obsComplete) {
-                  var r = Registo(peso, comeu, rate.round(), obs, DateTime.now());
+                  var r =
+                      Registo(peso, comeu, rate.round(), obs, DateTime.now());
                   print(r);
                   registarM.insert(r);
                   registarM.setActive(r);
@@ -138,7 +160,8 @@ class _FormularioRegisto extends State<FormularioRegisto> {
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MostraRegistoScreen()),
+                          MaterialPageRoute(
+                              builder: (context) => MostraRegistoScreen()),
                         );
                       },
                     ),
