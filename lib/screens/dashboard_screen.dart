@@ -44,7 +44,12 @@ class _DashboardScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
         child: Column(children: <Widget>[
-          const SizedBox(height: 10),
+          RichText(
+              text: const TextSpan(
+            text: 'Médias (Peso/Disposição)',
+            style: TextStyle(
+                color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold),
+          )),
           TableMedias(),
           const SizedBox(height: 30),
           Primeiro(),
