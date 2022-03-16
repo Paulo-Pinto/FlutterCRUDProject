@@ -152,10 +152,10 @@ class _FormularioRegisto extends State<FormularioRegisto> {
                   registarM.getPesos();
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content:
-                        const Text("O seu registo foi adicionado com sucesso."),
+                        const Text("O seu registo foi submetido com sucesso."),
                     duration: const Duration(seconds: 15),
                     action: SnackBarAction(
-                      label: 'Ver',
+                      label: 'Consultar Registo',
                       onPressed: () {
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                         Navigator.push(
