@@ -3,16 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../models/registar_model.dart';
-import '../screens/mostra_registo_screen.dart';
+import '../screens/list_screen.dart';
 
-class FormularioRegisto extends StatefulWidget {
-  const FormularioRegisto({Key? key}) : super(key: key);
+class FormularioRegistoPreenchido extends StatefulWidget {
+  const FormularioRegistoPreenchido({Key? key}) : super(key: key);
 
   @override
-  _FormularioRegisto createState() => _FormularioRegisto();
+  _FormularioRegistoPreenchido createState() => _FormularioRegistoPreenchido();
 }
 
-class _FormularioRegisto extends State<FormularioRegisto> {
+class _FormularioRegistoPreenchido extends State<FormularioRegistoPreenchido> {
   final _formKey = GlobalKey<FormState>();
 
   double peso = 0;
@@ -24,7 +24,12 @@ class _FormularioRegisto extends State<FormularioRegisto> {
   @override
   Widget build(BuildContext context) {
     final registarM = RegistarModel.getInstance();
-    registarM.gerarRegistos();
+    final registoAtual = registarM.getActive();
+
+    peso = registoAtual.peso;
+    // comeu = registoAtual.comeu;
+    // rate = registoAtual.rate;
+    obs = registoAtual.obs;
 
     return Form(
       key: _formKey,
@@ -33,10 +38,10 @@ class _FormularioRegisto extends State<FormularioRegisto> {
         runSpacing: 20,
         children: <Widget>[
           TextFormField(
+            initialValue: peso.toString(),
             decoration: const InputDecoration(
               icon: Icon(Icons.monitor_weight_rounded, size: 40),
               border: UnderlineInputBorder(),
-              // border: OutlineInputBorder(),
               hintText: 'Quanto pesou hoje?',
               labelText: 'Peso',
             ),
@@ -53,6 +58,7 @@ class _FormularioRegisto extends State<FormularioRegisto> {
             },
           ),
           TextFormField(
+            initialValue: (obs.isEmpty) ? "" : obs,
             maxLines: 3,
             maxLength: 200,
             decoration: const InputDecoration(
@@ -87,16 +93,17 @@ class _FormularioRegisto extends State<FormularioRegisto> {
                   // observation is okay, save it
                   obsComplete = true;
                   obs = value;
+                  return null;
                 }
               }
               obs = "";
+              return null;
             },
           ),
           CheckboxListTile(
             title: Text("Alimentou-se nas últimas 3 horas?"),
             controlAffinity: ListTileControlAffinity.leading,
             checkColor: Colors.white,
-            // fillColor: MaterialStateProperty.all<Color>(Colors.blue),
             value: comeu,
             onChanged: (bool? value) {
               setState(() {
@@ -123,29 +130,33 @@ class _FormularioRegisto extends State<FormularioRegisto> {
             child: ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate() && obsComplete) {
-                  var r = Registo(peso, comeu, rate.round(), obs, DateTime.now());
-                  print(r);
-                  registarM.insert(r);
-                  registarM.setActive(r);
-                  registarM.getPesos();
+                  var r = registarM.getRegistoById(registoAtual.id);
+                  r.peso = peso;
+                  r.comeu = comeu;
+                  r.rate = rate.round();
+                  r.obs = obs;
+                  // recalcular pesos, para atualizar o gráfico
+                  registarM.gerarPesos();
+
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content:
-                        const Text("O seu registo foi adicionado com sucesso."),
+                        const Text("O seu registo foi editado com sucesso."),
                     duration: const Duration(seconds: 15),
                     action: SnackBarAction(
-                      label: 'Ver',
+                      label: 'Voltar',
                       onPressed: () {
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MostraRegistoScreen()),
+                          MaterialPageRoute(
+                              builder: (context) => const ListScreen()),
                         );
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       },
                     ),
                   ));
                 }
               },
-              child: const Text('Registar'),
+              child: const Text('Editar'),
             ),
           ),
         ],
