@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:proj_comp_movel/screens/list_screen.dart';
 
-import '../registar.dart';
-import '../widgets/WidgetsDashboard.dart';
+import 'registar_screen.dart';
+import '../widgets/line_chart.dart';
+import '../widgets/table_medias.dart';
 import '../widgets/primeiro.dart';
 import '../widgets/ultimo.dart';
 
@@ -38,11 +39,20 @@ class _DashboardScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
           child: Column(children: <Widget>[
             TableMedias(),
-            // Variancia(),
-            // MediaRating(),
+            const SizedBox(height: 20), // space between buttons
             Primeiro(),
             Ultimo(),
-            // GraficoRegistos(),
+            const SizedBox(height: 40), // space between buttons
+            RichText(
+                text: const TextSpan(
+              text: 'Gráfico últimos 15 pesos',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold),
+            )),
+            const SizedBox(height: 10), // space between buttons
+            GraficoRegistos(),
           ]),
         ),
         floatingActionButton: Column(
