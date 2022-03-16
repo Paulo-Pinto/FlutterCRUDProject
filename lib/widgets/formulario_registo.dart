@@ -48,7 +48,7 @@ class _FormularioRegisto extends State<FormularioRegisto> {
               if (double.tryParse(value) == null) {
                 return 'Insira um número';
               }
-              peso = double.parse(value);
+              peso = double.parse(double.parse(value).toStringAsFixed(2));
               return null;
             },
           ),

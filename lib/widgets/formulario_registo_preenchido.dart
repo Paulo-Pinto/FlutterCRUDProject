@@ -17,7 +17,7 @@ class _FormularioRegistoPreenchido extends State<FormularioRegistoPreenchido> {
 
   double peso = 0;
   bool comeu = false;
-  double rate = 1.0;
+  double rate = 3.0;
   String obs = "";
   bool obsComplete = false;
 
@@ -53,7 +53,7 @@ class _FormularioRegistoPreenchido extends State<FormularioRegistoPreenchido> {
               if (double.tryParse(value) == null) {
                 return 'Insira um número';
               }
-              peso = double.parse(value);
+              peso = double.parse(double.parse(value).toStringAsFixed(2));
               return null;
             },
           ),
