@@ -20,17 +20,21 @@ class CustomTableCell extends StatefulWidget {
 class _CustomTableCell extends State<CustomTableCell> {
   @override
   Widget build(BuildContext context) {
-    if (widget.variancia != "") {
+    if (widget.variancia != "" && double.parse(widget.variancia) != 0.0) {
       Color colorVariance;
-      if (widget.rating == true) {
-        colorVariance = (double.parse(widget.variancia) > 0)
-            ? Color(0xFF2BAD34)
-            : Color(0xFFB71C1C);
-      } else {
-        colorVariance = (double.parse(widget.variancia) > 0)
-            ? Color(0xFFB71C1C)
-            : Color(0xFF2BAD34);
-      }
+      // if (widget.rating == true) {
+      //   colorVariance = (double.parse(widget.variancia) > 0)
+      //       ? Color(0xFF2BAD34)
+      //       : Color(0xFFB71C1C);
+      // } else {
+      //   colorVariance = (double.parse(widget.variancia) > 0)
+      //       ? Color(0xFFB71C1C)
+      //       : Color(0xFF2BAD34);
+      // }
+
+      colorVariance = (widget.rating == (double.parse(widget.variancia) > 0))
+          ? Color(0xFF2BAD34)
+          : Color(0xFFB71C1C);
 
       var sign = (double.parse(widget.variancia) > 0) ? "+" : "";
 
