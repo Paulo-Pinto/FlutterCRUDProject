@@ -12,6 +12,7 @@ class RegistarModel {
   ];
   final _pesosMap = {};
   final _pesosList = [];
+  late Registo _active;
 
   bool gerados = false;
 
@@ -24,7 +25,7 @@ class RegistarModel {
     var month = 2;
     var day = 15;
     for (var i = 15; i < 45; i++) {
-      pesoInicial += random.nextInt(4) - 2;
+      pesoInicial += random.nextInt(4) - 1.5;
 
       day = i;
       if (i >= 28) {
@@ -35,13 +36,8 @@ class RegistarModel {
           String.fromCharCode(i), DateTime(2022, month = month, day, 15, 30));
       _registos.add(r);
     }
-    // TODO : remove map _pesos
-    var pos = 1;
-    for (Registo r in _registos) {
-      _pesosMap[pos++] = r.peso;
-      if (_pesosList.length == 15) _pesosList.removeAt(0);
-      _pesosList.add(r.peso);
-    }
+
+    gerarPesos();
     gerados = true;
   }
 
@@ -56,7 +52,12 @@ class RegistarModel {
 
   List getAll() => _registos;
 
+  List? getAllReversed() => _registos.reversed.toList();
+
   Registo getIndex(int index) => _registos[index];
+
+  // TODO : fix, is returning null
+  Registo getIndexFromLast(int index) => _registos[getLength() - 1 - index];
 
   void removeItem(Registo registo) => _registos.remove(registo);
 
@@ -138,17 +139,42 @@ class RegistarModel {
     return (media / ctrRegistos);
   }
 
+// TODO : variancia pesos está ao contrário (?)
   String getVarianciaShort(String choice, int dias) {
     var media1 = getMediaInRange(choice, dias, dias * 2);
     var media2 = getMediaInRange(choice, 0, dias);
 
     // se não houver registos, sai
     if (media1.isNaN || media2.isNaN) {
-      print("Há um Nan $dias $choice");
+      // print("Há um Nan $dias $choice");
       return "";
     }
 
+    if(choice == "peso"){
+      return (-((media1 - media2) / media1) * 100).toStringAsFixed(2);
+    }
+
     return (((media1 - media2) / media1) * 100).toStringAsFixed(2);
+  }
+
+  void setActive(Registo r) => _active = r;
+
+  Registo getActive() => _active;
+
+  Registo? getRegistoById(int id) {
+    for (Registo r in _registos) {
+      if (r.id == id) return r;
+    }
+    return null;
+  }
+
+  void gerarPesos() {
+    var pos = 1;
+    for (Registo r in _registos) {
+      _pesosMap[pos++] = r.peso;
+      if (_pesosList.length == 15) _pesosList.removeAt(0);
+      _pesosList.add(r.peso);
+    }
   }
 }
 
@@ -163,6 +189,7 @@ class Registo {
 
   // TODO : impedir que registos no futuro sejam criados
   Registo(this.peso, this.comeu, this.rate, this.obs, this.data) {
+    if (obs.length < 100) obs = "";
     lastId++;
   }
 
