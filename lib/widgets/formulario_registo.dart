@@ -146,7 +146,7 @@ class _FormularioRegisto extends State<FormularioRegisto> {
                 if (_formKey.currentState!.validate() && obsComplete) {
                   var r =
                       Registo(peso, comeu, rate.round(), obs, DateTime.now());
-                  print(r);
+                  // print(r);
                   registarM.insert(r);
                   registarM.setActive(r);
                   registarM.getPesos();

@@ -28,7 +28,7 @@ class ListScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               if (index < registarM.getLength()) {
                 final Registo item = registarM.getIndexFromLast(index);
-                print(item.obs);
+                //print(item.obs);
                 return Dismissible(
                   confirmDismiss: (DismissDirection direction) async {
                     return await showDialog(

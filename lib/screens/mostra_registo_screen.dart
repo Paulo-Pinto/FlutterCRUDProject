@@ -16,7 +16,7 @@ class MostraRegistoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final registarM = RegistarModel.getInstance();
 
-    print(registarM.getActive());
+    // print(registarM.getActive());
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Registo',
