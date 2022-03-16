@@ -33,9 +33,7 @@ class TableMedias extends StatelessWidget {
 
             // border: TableBorder.all(color: Color(0xc1a5b0b3)),
             border: TableBorder.symmetric(
-              inside: const BorderSide(
-                  width: 0.8,
-                  color: Color(0xc1a5b0b3)),
+              inside: const BorderSide(width: 0.8, color: Color(0xc1a5b0b3)),
             ),
             // border: TableBorde,
             children: [
@@ -58,14 +56,14 @@ class TableMedias extends StatelessWidget {
                 ),
                 Center(
                   child: CustomTableCell(
-                      media: registarM.getMediaPeso(7),
-                      variancia: registarM.getVarianciaPeso(7),
+                      media: registarM.getAverage("peso",7),
+                      variancia: registarM.getVarianciaShort("peso",7),
                       rating: false),
                 ),
                 Center(
                   child: CustomTableCell(
-                      media: registarM.getMediaPeso(30),
-                      variancia: registarM.getVarianciaPeso(30),
+                      media: registarM.getAverage("peso",30),
+                      variancia: registarM.getVarianciaShort("peso",30),
                       rating: false),
                 ),
               ]),
@@ -75,14 +73,14 @@ class TableMedias extends StatelessWidget {
                 ),
                 Center(
                   child: CustomTableCell(
-                      media: registarM.getMediaRate(7),
-                      variancia: registarM.getVarianciaRate(7),
+                      media: registarM.getAverage("rate",7),
+                      variancia: registarM.getVarianciaShort("rate",7),
                       rating: true),
                 ),
                 Center(
                   child: CustomTableCell(
-                      media: registarM.getMediaRate(30),
-                      variancia: registarM.getVarianciaRate(30),
+                      media: registarM.getAverage("rate",30),
+                      variancia: registarM.getVarianciaShort("rate",30),
                       rating: true),
                 ),
               ]),
@@ -91,5 +89,3 @@ class TableMedias extends StatelessWidget {
     );
   }
 }
-
-
