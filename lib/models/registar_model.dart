@@ -25,14 +25,14 @@ class RegistarModel {
     var month = 2;
     var day = 15;
     for (var i = 15; i < 45; i++) {
-      pesoInicial += random.nextInt(4) - 1.5;
+      pesoInicial += random.nextInt(4) - 2;
 
       day = i;
       if (i >= 28) {
         month = 3;
         day = i - 27;
       }
-      var r = Registo(pesoInicial, random.nextBool(), random.nextInt(4) + 1,
+      var r = Registo(pesoInicial, random.nextBool(), random.nextInt(2) + 3,
           String.fromCharCode(i), DateTime(2022, month = month, day, 15, 30));
       _registos.add(r);
     }
@@ -104,7 +104,6 @@ class RegistarModel {
     return latest;
   }
 
-// TODO : change choice to first
   String getAverage(String choice, int dias) {
     var media = 0.0;
     var ctrRegistos = 0;
@@ -139,7 +138,7 @@ class RegistarModel {
     return (media / ctrRegistos);
   }
 
-// TODO : variancia pesos está ao contrário (?)
+// TODO : variancia está ao contrário (?)
   String getVarianciaShort(String choice, int dias) {
     var media1 = getMediaInRange(choice, dias, dias * 2);
     var media2 = getMediaInRange(choice, 0, dias);
@@ -150,11 +149,11 @@ class RegistarModel {
       return "";
     }
 
-    if(choice == "peso"){
+    if (choice == "peso") {
       return (-((media1 - media2) / media1) * 100).toStringAsFixed(2);
     }
 
-    return (((media1 - media2) / media1) * 100).toStringAsFixed(2);
+    return (-((media1 - media2) / media1) * 100).toStringAsFixed(2);
   }
 
   void setActive(Registo r) => _active = r;
@@ -213,9 +212,7 @@ class Registo {
 
   String toDisplay() {
     return formatDate() +
-        " - Pesou $peso kg, " +
-        (!comeu ? "não " : "") +
-        "comeu, e avaliou o seu dia com $rate/5";
+        " - Pesou $peso kg, avaliou o seu dia com $rate/5, " + (!comeu ? "não " : "") + "comeu";
   }
 
   String formatDate() {
